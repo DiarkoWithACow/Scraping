@@ -4,4 +4,4 @@ url = "https://stackoverflow.com/questions/5338979/scraping-a-web-page-with-java
 response = requests.get(url)
 soup = BeautifulSoup (response.text, "html.parser")
 first_paragraph = soup.find("p")
-print (first_paragraph)
+print (first)
