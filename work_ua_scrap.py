@@ -42,11 +42,19 @@ def workua_scraping(driver):
             else:
                 item["Company_Name"] = "not_mentioned"
 
-            company_location = vacancy.query_selector(".mt-xs span:last-child")
+            item["Location"] = ""
+            company_location = vacancy.query_selector(".mt-xs > span:not([class])")
             if company_location:
-                item["Location"] = company_location.inner_text().strip()
+                loc_text = company_location.inner_text().strip().replace(",", "")
+                item["Location"] = loc_text
             else:
-                item["Location"] = "not_mentioned"
+                spans = vacancy.query_selector_all(".mt-xs span")
+                loc_text = ""
+                for s in spans:
+                    cls = s.get_attribute("class") or ""
+                    if cls.strip() == "":
+                        loc_text = s.inner_text().strip().replace(",", "")
+                item["Location"] = loc_text
 
             salaryinfo  = vacancy.query_selector(":scope > div > span.strong-600")
             if salaryinfo:
