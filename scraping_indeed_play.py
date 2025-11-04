@@ -15,7 +15,7 @@ def indeed_scraping(driver):
     page_count = 0
     jobs = []
     while page_count <2:
-        print(f"Scraping job list from page {page_count + 1}...")
+        print(f"Scraping job list from page number {page_count + 1}...")
         time.sleep(3)
         page.goto('https://www.indeed.com/jobs?q=data+analyst&start='+str(page_count * 10))
         vacancies = page.locator('.cardOutline')
